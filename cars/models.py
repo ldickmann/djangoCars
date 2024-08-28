@@ -9,6 +9,13 @@ class Brand(models.Model):
         return self.name
 
 
+GEARSHIFT_CHOICES = [
+    ('manual', 'Manual'),
+    ('automático', 'Automático'),
+    ('cvt', 'CVT'),
+]
+
+
 class Car(models.Model):
     id = models.AutoField(primary_key=True)
     model = models.CharField(max_length=200)
@@ -16,6 +23,9 @@ class Car(models.Model):
     factory_year = models.IntegerField(blank=True, null=True)
     model_year = models.IntegerField(blank=True, null=True)
     plate = models.CharField(max_length=10, blank=True, null=True)
+    color = models.CharField(max_length=50, blank=True, null=True)
+    gearshift = models.CharField(max_length=10, choices=GEARSHIFT_CHOICES, blank=True, null=True)
+    mileage = models.IntegerField(blank=True, null=True)
     value = models.FloatField(blank=True, null=True)
     photo = models.ImageField(upload_to='cars/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)

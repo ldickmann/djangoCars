@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Motors Web{% endblock %}</title>
     
     <style>
         body {
@@ -16,7 +16,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .wrapper {
             display: flex;
             flex-direction: column;
@@ -41,9 +41,9 @@
         }
 
         nav {
-            background-color: #165620;
+            background-color: #08210d;
             color: #fff;
-            height: 50px;
+            height: 3.12rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,6 +54,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            width: 100%;
         }
 
         nav ul li {
@@ -79,7 +80,11 @@
         nav ul li.active a:hover {
             background-color: #999;
         }
-    
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+        }
+        
     </style>
 </head>
 <body>
@@ -89,18 +94,22 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li>Olá, {{ user.username }}</li>
+                {% endif %}
+                <div class="nav-right">
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'new_car' %}">Cadastrar Veículo</a></li>
-                {% endif %}
-                {% if not user.is_authenticated %}
-                    <li><a href="{% url 'register' %}">Cadastre-se</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-                
-                <li><a href="{% url 'cars_list' %}">Veículos</a></li>
-            
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% endif %}
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'register' %}">Cadastre-se</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+
+                    <li><a href="{% url 'cars_list' %}">Veículos</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                </div>
             </ul>
         </nav>
     </header>
@@ -111,7 +120,7 @@
     </main>
 </div>
 <footer>
-    <p>&copy; 2024 Lucas E. Dickmann | Web Developer</p>
+    <p>&copy; Motors Web | 2024 Lucas E. Dickmann | Web Developer</p>
 </footer>
 </body>
 </html>

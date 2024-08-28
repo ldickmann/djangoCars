@@ -13,6 +13,7 @@ class CarsListView(ListView):
 
     def get_queryset(self):
         cars = super().get_queryset().order_by('model')
+        
         search = self.request.GET.get('search')
         if search:
             cars = cars.filter(model__icontains=search)

@@ -1,11 +1,78 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Cadastrar" class="btn btn-primary">
-    </form>
+    <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3%;
+        height: 1100px;
+        width: 1000px;
+        background-color: #0d4d1f;
+        color: #fff;
+        margin: 2% auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 3%;
+        border-collapse: collapse;
+        border-radius: 3%;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+        background-color: #f8f8f8;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    tr th {
+        text-align: left;
+        padding: 10px;
+        background-color: #290254;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    td {
+        padding: 10px;
+        background-color: #000000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    input[type="submit"] {
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn {
+        background-color: #290254;
+        color: #fff;
+        margin-top: 1%;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+    </style>
+    <div class="container">
+    <h1>Cadastrar Veículo</h1>
+        <br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="car_table">
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Cadastrar" class="btn btn-primary">
+        </form>
+    </div>
 {% endblock %}

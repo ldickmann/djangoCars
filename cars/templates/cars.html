@@ -1,23 +1,53 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <style>
+        .retan {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 3rem;
+            background-image: url({% static 'img/luzes-car-backfround.jpg' %});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3%;
+            height: 2000px;
+            width: 1500px;
+            background-color: #0d4d1f;
+            margin: 2% auto;
+            position: relative;
+            z-index: 1;
+        }
+
         .car-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 1rem;
             margin: 0 auto;
             max-width: 1200px;
-            padding: 20px;
+            padding: 3rem;
+            z-index: 2;
         }
 
         .car-card {
             background-color: #e3e1e1;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            border-radius: 0.6rem;
             overflow: hidden;
             text-align: center;
             transition: all 0.3s ease;
+            z-index: 2;
         }
 
         .car-card:hover {
@@ -28,24 +58,28 @@
 
         .car-card img {
             width: 100%;
-            height: 200px;
+            height: 15rem;
             object-fit: cover;
+            z-index: 2;
         }
 
         .car-card h3 {
-            font-size: 20px;
-            margin-top: 10px;
-            margin-bottom: 5px;
+            font-size: 1.25rem;
+            margin-top: 3%;
+            margin-bottom: 2%;
+            z-index: 2;
         }
 
         .car-card h2 {
             font-size: 1.5rem;
-            margin: 10px;
+            margin: 4%;
+            z-index: 2;
         }
 
         .car-card p {
             font-size: 1rem;
-            margin-bottom: 10px;
+            margin-bottom: 4%;
+            z-index: 2;
         }
 
         @media (max-width: 768px) {
@@ -58,18 +92,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 2.5rem;
             text-align: center;
             padding: 20px;
+            z-index: 2;
         }
 
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
             border: 2px solid #e3e1e1;
-            border-radius: 4px;
+            border-radius: 0.6rem;
             margin-right: 10px;
             transition: border-bottom-color 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            z-index: 2;
         }
 
         input[type="text"]:focus {
@@ -81,49 +118,55 @@
             background-color: #000000;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 13px 20px;
             font-size: 16px;
-            border-radius: 4px;
+            border-radius: 0.6rem;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
         button[type="submit"]:hover {
-            background-color: #008812;
+            background-color: #da3f3f;
         }
+
         a {
             font-size: 18px;
             color: #333;
             text-decoration: none;
+            z-index: 2;
         }
 
         a:hover {
             color: #0096c7;
         }
     </style>
-
-    <form method="GET" action="{% url 'cars_list' %}">
-        <input type="text" name="search" placeholder="Buscar carro...">
-        <button type="submit">Buscar</button>
-    </form>
-
-    <div class="car-grid">
-        {% if cars %}
-            {% for car in cars %}
-                <a href="{% url 'car_detail' car.pk %}">
-                    <div class="car-card">
-                        {% if car.photo %}
-                            <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
-                        {% else %}
-                            <p class="no-photo">Imagem não disponível</p>
-                        {% endif %}
-                        <h2>{{ car.brand }} {{ car.model }}</h2>
-                        <p>{{ car.factory_year }} - R$ {{ car.value }}</p>
-                    </div>
-                </a>
-            {% endfor %}
-        {% else %}
-            <p class="no-results">Nenhum carro encontrado.</p>
-        {% endif %}
+    <div class="retan">
+        <form method="GET" action="{% url 'cars_list' %}">
+            <input type="text" name="search" placeholder="Buscar veículo">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="car-grid">
+            {% if cars %}
+                {% for car in cars %}
+                    <a href="{% url 'car_detail' car.pk %}">
+                        <div class="car-card">
+                            {% if car.photo %}
+                                <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+                            {% else %}
+                                <p class="no-photo">Imagem não disponível</p>
+                            {% endif %}
+                            <h2>{{ car.brand }} {{ car.model }}</h2>
+                            <p>{{ car.factory_year }} - R$ {{ car.value }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">Nenhum carro encontrado.</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
