@@ -21,10 +21,11 @@ djangoCars é uma aplicação web Django que apresenta um catálogo de carros, p
 * Python
 * Django
 * Pillow
+* PostgreSQL
 
 **Instalação:**
 
-1. Clone este repositório: `git clone https://github.com/seu-usuario/djangoCars.git`
+1. Clone este repositório: `git clone https://github.com/ldickmann/djangoCars.git`
 2. Navegue até o diretório: `cd djangoCars`
 3. Crie um ambiente virtual: `python -m venv venv`
 4. Ative o ambiente virtual:
